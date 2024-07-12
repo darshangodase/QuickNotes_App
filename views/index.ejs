@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="container mx-auto p-4 flex flex-col items-center justify-center h-full">
+        <h1 class="text-2xl font-bold mb-4 text-center">KhataBook</h1> 
+        <div class="bg-blue-100 shadow-md rounded p-6 mb-4 w-4/5 md:w-2/3 lg:w-1/2">
+
+
+                <form action="/create" method="post">
+    
+                <input required id="fileName" class=" mb-4 border border-gray-300 p-2 w-full" type="text" placeholder="File Name" name="title"/>
+                <textarea id="fileContent" class=" mb-4 border border-gray-300 p-2 w-full h-40 resize-none" placeholder="Write your notes here..." name="filedata"></textarea>
+
+                <button id="createButton" class="bg-green-500 text-white px-4 py-2 rounded ">create</button>
+                </form>
+
+        </div>
+
+
+        <% if (files.length < 1) { %>
+            <div class="bg-blue-100 shadow-md rounded p-4 mb-4 w-4/5 md:w-2/3 lg:w-1/2 flex items-center justify-between">
+                <span>No files available</span>
+            </div>
+
+        <% } else { %>
+
+            <h1 class="text-2xl  mb-4 text-center">Your Tasks</h1> 
+            <% files.forEach(file => { 
+                const fileName=file.split('.')[0];
+            %>
+                <div class="bg-blue-100 shadow-md rounded p-4 mb-4 w-4/5 md:w-2/3 lg:w-1/2 flex items-center justify-between">
+                    <span><%= fileName %></span>
+                    <div class="flex space-x-2">
+                        <a href="/read/<%=fileName%>" class="text-yellow-500">Read</a>
+                        <a href="/edit/<%=fileName%>" class="text-blue-500">Edit</a>
+                        <a href="/" onclick="confirmDelete('<%= fileName %>')" class="text-red-500">Delete</a>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+        
+    </div>
+    <script>
+        function confirmDelete(filename) {
+            if (confirm('Are you sure you want to delete this file?')) {
+                window.location.href = '/delete/' + filename;
+            }
+        }
+    </script>
+</body>
+</html>
