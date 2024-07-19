@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Notes - QuickNotes</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <style>
+        .note-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .min-h-screen-with-footer {
+            min-height: calc(100vh - 4rem); /* Adjust for footer height */
+        }
+        .scroll-container {
+            max-height: 80vh; /* Adjust for overflow scrolling */
+            overflow-y: auto;
+        }
+        .hidden-notes {
+            display: none;
+        }
+        .visible-notes {
+            display: block;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: gray;
+        }
+        .search-input {
+            padding-left: 35px;
+        }
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg w-full">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+                <div class="flex items-center">
+                    <a href="/" class="absolute top-5 left-4 flex items-center bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2 shadow-md hover:bg-gray-200 hover:border-gray-400 transition duration-300 md:hidden">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back
+                    </a>
+                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
+                    <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <form action="/search" method="post" class="relative search-container">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 100 14 7 7 0 000-14zM18 18l4 4" />
+                        </svg>
+                        <input type="text" placeholder="Search notes..." class="border border-gray-300 p-2 rounded pl-10 search-input" name="search">
+                    </form>
+                    <a href="/create-note" class="text-blue-600 hover:text-blue-800">Create Note</a>
+                    <a href="/all-notes" class="text-gray-700 hover:text-blue-600">Show Notes</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-full bg-white shadow-lg z-50">
+        <div class="flex justify-between items-center p-4">
+            <div class="flex items-center">
+                <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
+                <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
+            </div>
+            <button id="closeMobileMenu" class="text-gray-700">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col p-4 space-y-4">
+            <form action="/search" method="post" class="relative search-container mb-4">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 100 14 7 7 0 000-14zM18 18l4 4" />
+                </svg>
+                <input type="text" placeholder="Search notes..." class="border border-gray-300 p-2 rounded pl-10 search-input" name="search">
+            </form>
+            <a href="/create-note" class="text-blue-600 hover:text-blue-800">Create Note</a>
+            <a href="/all-notes" class="text-gray-700 hover:text-blue-600">Show Notes</a>
+            <a href="/" class="text-gray-700 hover:text-blue-600">Back</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="flex-grow py-20 min-h-screen-with-footer">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-4xl font-bold mb-4">All Notes</h1>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="scroll-container">
+                <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <% files.forEach((file, index) => { 
+                        const fileName = file.split('.')[0];
+                        const hiddenClass = index >= 12 ? 'hidden-notes' : '';
+                    %>
+                        <div class="bg-white shadow-md rounded-lg p-6 note-card <%= hiddenClass %>">
+                            <div class="flex items-center mb-2">
+                                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 2H6C5.44772 2 5 2.44772 5 3V21C5 21.5523 5.44772 22 6 22H18C18.5523 22 19 21.5523 19 21V8L14 2Z" fill="#3B82F6"/>
+                                    <path d="M13 2.5V8H18.5L13 2.5Z" fill="#1E3A8A"/>
+                                </svg>
+                                <h2 class="text-xl font-semibold"><%= fileName %></h2>
+                            </div>
+                            <p class="text-gray-600 mb-4">This is a brief description of the note.</p>
+                            <a href="/notes/<%= file %>" class="text-blue-600 hover:text-blue-800">Open Note</a>
+                        </div>
+                    <% }); %>
+                </div>
+
+                <!-- Show More Button -->
+                <button id="showMoreButton" class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4">
+                    Show More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2024 QuickNotes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('show');
+        });
+
+        // Show More Button Logic
+        const showMoreButton = document.getElementById('showMoreButton');
+        const notesContainer = document.getElementById('notesContainer');
+
+        showMoreButton.addEventListener('click', () => {
+            const hiddenNotes = notesContainer.querySelectorAll('.hidden-notes');
+            hiddenNotes.forEach(note => {
+                note.classList.remove('hidden-notes');
+                note.classList.add('visible-notes');
+            });
+
+            showMoreButton.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+

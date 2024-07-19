@@ -3,27 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit File</title>
+    <title>Edit File - QuickNotes</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <style>
+        .container {
+            max-width: 800px;
+        }
+        .form-section {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .btn-primary {
+            background-color: #3B82F6;
+            color: #ffffff;
+        }
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+    </style>
 </head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg w-full">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="/all-notes" class="flex items-center bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2 shadow-md hover:bg-gray-200 hover:border-gray-400 transition duration-300">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back
+                    </a>
+                    <div class="flex items-center">
+                        <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12">
+                        <a href="/" class="text-gray-700 text-2xl font-bold ml-2">QuickNotes</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/all-notes" class="text-gray-700 hover:text-blue-600">All Notes</a>
+                    <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/all-notes" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">All Notes</a>
+                <a href="/" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">Home</a>
+            </div>
+        </div>
+    </nav>
 
-<body class="bg-gray-100 h-screen flex items-center justify-center">
-    <div class="container mx-auto p-4 flex flex-col items-center justify-center h-full relative">
-        <a href="/" class="bg-blue-500 text-white px-4 py-2 rounded absolute top-4 left-4">Home</a>
-        <h1 class="text-2xl font-bold mb-4 text-center">Edit File</h1> 
-        <form action="/update/<%= filename %>" method="post" class="bg-white shadow-md rounded p-6 mb-4 w-4/5 md:w-2/3 lg:w-1/2">
-            <div class="mb-4">
-                <input id="fileName" name="filename" class="border border-gray-300 p-2 w-full" type="text" value="<%= filename %>" />
-            </div>
-            <div class="mb-4">
-                <textarea name="filedata" class="bg-gray-100 p-4 rounded border border-gray-300 h-64 overflow-auto w-full resize-none"><%= data %></textarea>
-            </div>
-            <div class="flex justify-end mt-4 space-x-2">
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
-                <a href="/" class="bg-red-500 text-white px-4 py-2 rounded">Cancel</a>
-            </div>
-        </form>
+    <!-- Edit File Section -->
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-6 text-center">EDIT <%=filename%></h1>
+        <div class="form-section">
+            <form action="/update/<%= filename %>" method="post">
+                <!-- Hidden input to keep the original filename -->
+                <input type="hidden" name="originalFilename" value="<%= filename %>">
+                <!-- Editable filename input -->
+                <input id="fileName" name="filename" class="mb-4 border border-gray-300 p-3 w-full rounded" type="text" value="<%= filename %>">
+                <textarea name="filedata" class="mb-4 border border-gray-300 p-3 w-full h-60 resize-none rounded" placeholder="Write your notes here..."><%= data %></textarea>
+                <div class="flex justify-between">
+                    <button type="submit" class="btn-primary px-4 py-2 rounded">Save</button>
+                    <a href="/all-notes" class="btn-secondary px-4 py-2 rounded text-center">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-lg w-full mt-8 py-6 flex flex-col items-center space-y-4">
+        <div class="text-center text-gray-700">
+            &copy; 2024 QuickNotes. All rights reserved.
+        </div>
+        <div class="text-center">
+            <a href="https://www.linkedin.com/in/darshangodase" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors">
+                Contact Me on LinkedIn
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
