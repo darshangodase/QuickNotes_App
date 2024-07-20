@@ -189,6 +189,10 @@
     </footer>
   
     <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
         document.getElementById('showMore').addEventListener('click', function() {
             const hiddenNotes = document.querySelectorAll('.hidden-notes');
             hiddenNotes.forEach(note => {
