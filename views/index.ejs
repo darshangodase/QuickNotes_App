@@ -6,7 +6,7 @@
     <title>QuickNotes</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/logo.webp" type="image/x-icon">
     <style>
         .relative .blur-md::before {
             content: '';
@@ -61,7 +61,7 @@
             <div class="flex space-x-4">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
+                    <img src="/assets/logo.webp" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
                     <a href="/" class="flex items-center py-5 px-2 text-white">
                         <span class="font-bold text-lg">QuickNotes</span>
                     </a>
@@ -93,14 +93,14 @@
 
 
     <!-- Hero Section -->
-<section id="hero" class="relative bg-cover bg-center flex-grow flex items-center justify-center overflow-hidden pt-16" style="background-image: url('/assets/notepad.png'); background-size: cover; background-position: center; height: 100vh;">
+<section id="hero" class="relative bg-cover bg-center flex-grow flex items-center justify-center overflow-hidden pt-16" style="background-image: url('/assets/notepad.webp'); background-size: cover; background-position: center; height: 100vh;">
     <!-- Gradient Overlay -->
     <div class="absolute inset-0 bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 opacity-50 z-0"></div>
     
     <!-- Content Overlay -->
-    <div class="relative z-10 text-center bg-white bg-opacity-75 p-8 md:p-10 lg:p-12 rounded-lg shadow-lg max-w-3xl mx-auto">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-6 leading-tight">Welcome to QuickNotes</h1>
-        <p class="text-lg md:text-xl lg:text-2xl text-gray-700 mb-8">The ultimate notepad app to organize your thoughts and tasks efficiently. Start creating, editing, and managing your notes with ease.</p>
+    <div class="relative z-10 text-center bg-white bg-opacity-0 p-8 md:p-10 lg:p-12 rounded-lg shadow-lg max-w-3xl mx-auto">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">Welcome to QuickNotes</h1>
+        <p class="text-lg md:text-xl lg:text-2xl text-white-700 mb-8 font-bold">The ultimate notepad app to organize your thoughts and tasks efficiently. Start creating, editing, and managing your notes with ease.</p>
         <a href="/all-notes" class="bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full shadow-lg hover:bg-blue-500 transition duration-300 inline-block">Get Started</a>
     </div>
 </section>
@@ -146,8 +146,8 @@
                 <div class="feature-item p-8 bg-gray-100 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-red-600 hover:text-white">
                     <div class="flex justify-center items-center mb-4">
                         <!-- Delete Notes Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-red-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg class="w-12 h-12 mr-1 text-red-600 transition-all duration-300 feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3h6v2H9V3zM4 7h16M7 7v13a1 1 0 001 1h8a1 1 0 001-1V7M10 11v6M14 11v6" />
                         </svg>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Delete Notes</h3>

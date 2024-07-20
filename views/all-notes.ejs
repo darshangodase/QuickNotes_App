@@ -6,7 +6,7 @@
     <title>All Notes - QuickNotes</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/logo.webp" type="image/x-icon">
     <style>
         .note-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -17,10 +17,6 @@
         }
         .min-h-screen-with-footer {
             min-height: calc(100vh - 4rem); /* Adjust for footer height */
-        }
-        .scroll-container {
-            max-height: 80vh; /* Adjust for overflow scrolling */
-            overflow-y: auto;
         }
         .hidden-notes {
             display: none;
@@ -79,7 +75,7 @@
                             Back
                         </a>
                     </div>
-                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12">
+                    <img src="/assets/logo.webp" alt="QuickNotes Logo" class="h-12 w-12">
                     <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
@@ -118,6 +114,14 @@
             </div>
         </div>
     </nav>
+   <!-- Mobile Create Note Button -->
+<div class="fixed bottom-4 right-4 md:hidden">
+    <a href="/create-note" class="bg-blue-500 text-white h-12 w-12 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+    </a>
+</div>
 
     <section class="flex-grow py-20 min-h-screen-with-footer">
         <div class="max-w-6xl mx-auto px-4">
@@ -125,7 +129,6 @@
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-4xl font-bold mb-4">All Notes</h1>
             </div>
-
             <!-- Notes Grid -->
             <div class="scroll-container">
                 <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

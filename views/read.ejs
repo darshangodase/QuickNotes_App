@@ -6,7 +6,7 @@
     <title>Read File - QuickNotes</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/logo.webp" type="image/x-icon">
     <style>
         .scroll-container {
             max-height: 80vh; /* Adjust for overflow scrolling */
@@ -66,7 +66,7 @@
                             Back
                         </a>
                     </div>
-                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12">
+                    <img src="/assets/logo.webp" alt="QuickNotes Logo" class="h-12 w-12">
                     <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
@@ -109,7 +109,7 @@
     <!-- Main Content -->
     <section class="flex-grow py-20 min-h-screen-with-footer">
         <div class="max-w-6xl mx-auto px-4">
-            <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">READ "<%=filename%>"</h1>
+            <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">Read <span class="text-red-600">"<%=filename%>"</span></h1>
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="mb-4">
                     <label for="fileName" class="block text-gray-700 font-semibold mb-2">File Name:</label>
