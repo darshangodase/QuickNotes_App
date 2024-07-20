@@ -43,13 +43,6 @@
         .search-input {
             padding-left: 35px;
         }
-        /* Mobile Menu Styles */
-        .mobile-menu {
-            display: none;
-        }
-        .mobile-menu.show {
-            display: block;
-        }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -57,23 +50,11 @@
     <nav class="bg-white shadow-lg w-full">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuButton" class="md:hidden text-gray-700">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
                 <div class="flex items-center">
-                    <a href="/" class="absolute top-5 left-4 flex items-center bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2 shadow-md hover:bg-gray-200 hover:border-gray-400 transition duration-300 md:hidden">
-                        <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                        Back
-                    </a>
                     <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
                     <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
                 </div>
-                <div class="hidden md:flex items-center space-x-4">
+                <div class="flex items-center space-x-4">
                     <form action="/search" method="post" class="relative search-container">
                         <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 100 14 7 7 0 000-14zM18 18l4 4" />
@@ -86,36 +67,17 @@
             </div>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-full bg-white shadow-lg z-50">
-        <div class="flex justify-between items-center p-4">
-            <div class="flex items-center">
-                <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
-                <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
-            </div>
-            <button id="closeMobileMenu" class="text-gray-700">
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div class="flex flex-col p-4 space-y-4">
-            <form action="/search" method="post" class="relative search-container mb-4">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 100 14 7 7 0 000-14zM18 18l4 4" />
-                </svg>
-                <input type="text" placeholder="Search notes..." class="border border-gray-300 p-2 rounded pl-10 search-input" name="search">
-            </form>
-            <a href="/create-note" class="text-blue-600 hover:text-blue-800">Create Note</a>
-            <a href="/all-notes" class="text-gray-700 hover:text-blue-600">Show Notes</a>
-            <a href="/" class="text-gray-700 hover:text-blue-600">Back</a>
-        </div>
-    </div>
-
-    <!-- Main Content -->
+    
+    <a href="/" class="absolute top-20 left-8 flex items-center bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2 shadow-md hover:bg-gray-200 hover:border-gray-400 transition duration-300">
+        <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back
+    </a>
+    
     <section class="flex-grow py-20 min-h-screen-with-footer">
         <div class="max-w-6xl mx-auto px-4">
+
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-4xl font-bold mb-4">All Notes</h1>
             </div>
@@ -135,55 +97,68 @@
                                 </svg>
                                 <h2 class="text-xl font-semibold"><%= fileName %></h2>
                             </div>
-                            <p class="text-gray-600 mb-4">This is a brief description of the note.</p>
-                            <a href="/notes/<%= file %>" class="text-blue-600 hover:text-blue-800">Open Note</a>
+                            <div class="flex space-x-4">
+                                <a href="/read/<%= fileName %>" class="text-blue-500 hover:text-blue-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5c-7.18 0-9 7.32-9 7.32s1.82 7.32 9 7.32 9-7.32 9-7.32-1.82-7.32-9-7.32zm0 3c1.886 0 3.413 1.527 3.413 3.413S13.886 14.327 12 14.327 8.587 12.8 8.587 11.913 10.114 7.5 12 7.5zm0 1.5c-.886 0-1.61.723-1.61 1.61s.723 1.61 1.61 1.61 1.61-.723 1.61-1.61S12.886 9 12 9z" />
+                                    </svg>
+                                    Read
+                                </a>                                        
+                                <a href="/edit/<%= fileName %>" class="text-yellow-500 hover:text-yellow-600 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5l7 7-1.5 1.5L9.5 6.5 11 5zm-7 7l4-4 7 7-4 4-7-7zM3 20h18v2H3v-2z" />
+                                    </svg>
+                                    Edit
+                                </a>
+                                <a href="/delete/<%= fileName %>" class="text-red-500 hover:text-red-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3h6v2H9V3zM4 7h16M7 7v13a1 1 0 001 1h8a1 1 0 001-1V7M10 11v6M14 11v6" />
+                                    </svg>
+                                    Delete
+                                </a>                                
+                            </div>
                         </div>
-                    <% }); %>
+                    <% }) %>
                 </div>
-
-                <!-- Show More Button -->
-                <button id="showMoreButton" class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4">
-                    Show More
-                </button>
             </div>
+
+            <!-- Show More Button -->
+            <% if (files.length > 12) { %>
+                <div class="mt-8 flex justify-center">
+                    <button id="showMore" class="bg-blue-500 text-white px-4 py-2 rounded">Show More</button>
+                </div>
+            <% } %>
         </div>
     </section>
 
+    
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-4">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p>&copy; 2024 QuickNotes. All rights reserved.</p>
+    <footer class="bg-white shadow-lg w-full mt-8 py-6 flex flex-col items-center space-y-4">
+        <div class="text-center text-gray-700">
+            &copy; 2024 QuickNotes. All rights reserved.
+        </div>
+        <div class="text-center">
+            <a href="https://www.linkedin.com/in/darshangodase" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors">
+                Contact Me on LinkedIn
+            </a>
         </div>
     </footer>
-
+  
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('show');
-        });
-
-        closeMobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
-        });
-
-        // Show More Button Logic
-        const showMoreButton = document.getElementById('showMoreButton');
-        const notesContainer = document.getElementById('notesContainer');
-
-        showMoreButton.addEventListener('click', () => {
-            const hiddenNotes = notesContainer.querySelectorAll('.hidden-notes');
+        document.getElementById('showMore').addEventListener('click', function() {
+            const hiddenNotes = document.querySelectorAll('.hidden-notes');
             hiddenNotes.forEach(note => {
                 note.classList.remove('hidden-notes');
                 note.classList.add('visible-notes');
             });
-
-            showMoreButton.style.display = 'none';
+            this.style.display = 'none'; // Hide the button after showing all notes
         });
+
+        function confirmDelete(fileName) {
+            if (confirm('Are you sure you want to delete this note?')) {
+                window.location.href = '/delete/' + fileName;
+            }
+        }
     </script>
 </body>
 </html>
-
