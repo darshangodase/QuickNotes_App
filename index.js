@@ -44,7 +44,7 @@ app.get('/read/:filename', (req, res) => {
 
     fs.readFile(`./files/${filename}.txt`, 'utf-8', (err, fileContent) => {
         if (err) return res.send('Something went wrong');
-        else res.render("show", { filename, fileContent });
+        else res.render("read", { filename, fileContent });
     });
 });
 

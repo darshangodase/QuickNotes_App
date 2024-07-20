@@ -43,6 +43,26 @@
         .search-input {
             padding-left: 35px;
         }
+        .nav-button {
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .nav-button a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 8px 16px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .nav-button a:hover {
+            background-color: #e5e7eb;
+            border-color: #9ca3af;
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -50,30 +70,54 @@
     <nav class="bg-white shadow-lg w-full">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12 mr-2">
+                <div class="flex items-center space-x-2">
+                    <div class="nav-button">
+                        <a href="/all-notes">
+                            <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            Back
+                        </a>
+                    </div>
+                    <img src="/assets/logo.png" alt="QuickNotes Logo" class="h-12 w-12">
                     <a href="/" class="text-gray-700 text-2xl font-bold">QuickNotes</a>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-4">
                     <form action="/search" method="post" class="relative search-container">
-                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600 transition-all duration-300 feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 100 14 7 7 0 000-14zM18 18l4 4" />
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 4a6 6 0 100 12 6 6 0 000-12zm8.707 14.707a1 1 0 01-1.414-1.414l1.414 1.414z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35" />
                         </svg>
                         <input type="text" placeholder="Search notes..." class="border border-gray-300 p-2 rounded pl-10 search-input" name="search">
                     </form>
                     <a href="/create-note" class="text-blue-600 hover:text-blue-800">Create Note</a>
                     <a href="/all-notes" class="text-gray-700 hover:text-blue-600">Show Notes</a>
                 </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <form action="/search" method="post" class="relative search-container">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 4a6 6 0 100 12 6 6 0 000-12zm8.707 14.707a1 1 0 01-1.414-1.414l1.414 1.414z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="text" placeholder="Search notes..." class="border border-gray-300 p-2 rounded pl-10 search-input w-full" name="search">
+                </form>
+                <a href="/create-note" class="block text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-base font-medium">Create Note</a>
+                <a href="/all-notes" class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium">Show Notes</a>
             </div>
         </div>
     </nav>
-    
-    <a href="/" class="absolute top-20 left-8 flex items-center bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2 shadow-md hover:bg-gray-200 hover:border-gray-400 transition duration-300">
-        <svg class="w-5 h-5 mr-2 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Back
-    </a>
     
     <section class="flex-grow py-20 min-h-screen-with-footer">
         <div class="max-w-6xl mx-auto px-4">
